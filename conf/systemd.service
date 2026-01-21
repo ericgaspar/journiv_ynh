@@ -7,8 +7,8 @@ Type=notify
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__
-Environment="PATH=/opt/journiv/venv/bin"
-ExecStart=/opt/journiv/venv/bin/gunicorn app.main:app \
+Environment="PATH=__INSTALL_DIR__/venv/bin"
+ExecStart=__INSTALL_DIR__/venv/bin/gunicorn app.main:app \
   -w 4 \
   -k uvicorn.workers.UvicornWorker \
   --bind 127.0.0.1:__PORT__ \
