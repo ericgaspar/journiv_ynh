@@ -14,9 +14,7 @@ maintainers = ["eric_G"]
 [upstream]
 license = "free"
 website = "https://www.journiv.com/"
-demo = "https://demo.example.com"
 admindoc = "https://www.journiv.com/docs/installation"
-userdoc = "https://yunohost.org/apps"
 code = "https://github.com/journiv/journiv-app"
 
 [integration]
