@@ -1,18 +1,23 @@
 [Unit]
-Description=Small description of the service
-After=network.target
+Description=Journiv: Journaling Application
+After=network.target postgresql.service
 
 [Service]
-Type=simple
+Type=notify
 User=__APP__
 Group=__APP__
-WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/script
-StandardOutput=append:/var/log/__APP__/__APP__.log
-StandardError=inherit
+WorkingDirectory=__INSTALL_DIR__
+Environment="PATH=/opt/journiv/venv/bin"
+ExecStart=/opt/journiv/venv/bin/gunicorn app.main:app \
+  -w 4 \
+  -k uvicorn.workers.UvicornWorker \
+  --bind 127.0.0.1:__PORT__ \
+  --access-logfile - \
+  --error-logfile -
+Restart=always
+RestartSec=10
 
-### Depending on specificities of your service/app, you may need to tweak these
-### .. but this should be a good baseline
+
 # Sandboxing options to harden security
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
